@@ -1,5 +1,6 @@
 // Archivo que contiene las rutas y la lógica del servicio de salas
 const express = require('express');
+// Conexión a PostgreSQL
 const pool = require('./db');
 const app = express();
 const PORT = 3000;
@@ -7,11 +8,6 @@ const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
-
-app.get('/salas', async (req, res) => {
-  const result = await pool.query('SELECT * FROM salas');
-  res.json(result.rows);
-});
 
 // Ruta para crear la tabla "salas"
 app.get('/crear-tabla', async (req, res) => {
@@ -38,7 +34,7 @@ app.get('/crear-tabla', async (req, res) => {
       const result = await pool.query('SELECT * FROM salas ORDER BY nombre');
       res.json(result.rows);
     } catch (err) {
-      console.error(err);
+      console.error('Error al obtener salas:', err.message);
       res.status(500).send('Error al obtener salas');
     }
   });
@@ -74,17 +70,17 @@ app.get('/crear-tabla', async (req, res) => {
   // Ruta para actualizar una sala
   app.put('/salas/:id', async (req, res) => {
     const { id } = req.params;
-    const { nombre, capacidad, ubicacion, disponible } = req.body;
+    const { nombre, ubicacion, capacidad } = req.body;
+
     try {
-      const result = await pool.query(
-        'UPDATE salas SET nombre = $1, capacidad = $2, ubicacion = $3, disponible = $4 WHERE id = $5 RETURNING *',
-        [nombre, capacidad, ubicacion, disponible, id]
+      await pool.query(
+        'UPDATE salas SET nombre = $1, ubicacion = $2, capacidad = $3 WHERE id = $4',
+        [nombre, ubicacion, capacidad, id]
       );
-      if (result.rows.length === 0) return res.status(404).send('Sala no encontrada');
-      res.json(result.rows[0]);
+      res.send('Sala actualizada correctamente');
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Error al actualizar la sala');
+      console.error('Error al actualizar sala:', err.message);
+      res.status(500).send('Error al actualizar sala');
     }
   });
 
@@ -197,7 +193,7 @@ app.get('/crear-tabla', async (req, res) => {
   
   const cron = require('node-cron');
 
-  //Ruta que se ejecuta cada minuto y elimina las reservas vencidas automaticamente
+  //Se ejecuta cada minuto y elimina las reservas vencidas automaticamente
   cron.schedule('* * * * *', async () => {
     const ahora = new Date();
     const fechaActual = ahora.toISOString().split('T')[0];

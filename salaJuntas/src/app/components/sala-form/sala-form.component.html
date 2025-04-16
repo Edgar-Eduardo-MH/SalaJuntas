@@ -1,25 +1,57 @@
-<h2>Agregar Sala de Juntas</h2>
+<!-- Formulario para crear salas -->
+<div class="container mt-4">
+  <div class="card shadow-lg">
+    <div class="card-header bg-dark text-white">
+      <h4 class="mb-0">Agregar Sala de Juntas</h4>
+    </div>
 
-<form (ngSubmit)="crearSala()" #formulario="ngForm">
-  <label>
-    Nombre:
-    <input type="text" [(ngModel)]="sala.nombre" name="nombre" required />
-  </label>
-  <br />
+    <div class="card-body">
+      <form (ngSubmit)="crearSala()" #formulario="ngForm">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nombre"
+            [(ngModel)]="sala.nombre"
+            name="nombre"
+            required
+          />
+        </div>
 
-  <label>
-    Capacidad:
-    <input type="number" [(ngModel)]="sala.capacidad" name="capacidad" required />
-  </label>
-  <br />
+        <div class="mb-3">
+          <label for="capacidad" class="form-label">Capacidad:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="capacidad"
+            [(ngModel)]="sala.capacidad"
+            name="capacidad"
+            min="1"
+            required
+          />
+        </div>
 
-  <label>
-    Ubicación:
-    <input type="text" [(ngModel)]="sala.ubicacion" name="ubicacion" required />
-  </label>
-  <br />
+        <div class="mb-3">
+          <label for="ubicacion" class="form-label">Ubicación:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="ubicacion"
+            [(ngModel)]="sala.ubicacion"
+            name="ubicacion"
+            required
+          />
+        </div>
 
-  <button type="submit" [disabled]="formulario.invalid">Crear Sala</button>
-</form>
+        <button type="submit" class="btn btn-success" [disabled]="formulario.invalid">
+          Crear Sala
+        </button>
+      </form>
 
-<p>{{ mensaje }}</p>
+      <div *ngIf="mensaje" class="mt-3 alert alert-info">
+        {{ mensaje }}
+      </div>
+    </div>
+  </div>
+</div>

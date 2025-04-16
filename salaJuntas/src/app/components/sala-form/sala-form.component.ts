@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { SalaService } from '../../services/sala.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sala-form',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './sala-form.component.html',
   styleUrl: './sala-form.component.css'
 })
@@ -21,6 +22,7 @@ export class SalaFormComponent {
 
   constructor(private salaService: SalaService) {}
 
+  //Funcion que se encarga de validar los datos y enviar la solicitud a la API
   crearSala(): void {
     this.salaService.crearSala(this.sala).subscribe({
       next: (res) => {

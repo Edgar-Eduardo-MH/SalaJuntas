@@ -1,13 +1,46 @@
-<h2>Lista de Salas</h2>
+<!-- Aqui se enlistan las salas para poderlas editar o eliminar -->
+<div class="container mt-4">
+  <h2 class="mb-4">Lista de Salas</h2>
 
-<div *ngIf="cargando">Cargando salas...</div>
+  <div *ngIf="cargando" class="text-center">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2">Cargando salas...</p>
+  </div>
 
-<ul *ngIf="!cargando && salas.length > 0">
-  <li *ngFor="let sala of salas">
-    <strong>{{ sala.nombre }}</strong> – {{ sala.ubicacion }} (Capacidad: {{ sala.capacidad }})
-  </li>
-</ul>
+  <ul class="list-group" *ngIf="!cargando && salas.length > 0">
+    <li class="list-group-item mb-2" *ngFor="let sala of salas">
+      <!-- Vista normal -->
+      <div *ngIf="salaEditando?.id !== sala.id" class="d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ sala.nombre }}</strong> – {{ sala.ubicacion }} 
+          <span class="badge bg-secondary ms-2">Capacidad: {{ sala.capacidad }}</span>
+        </div>
+        <div class="col-md-4 d-flex gap-2">
+          <button class="btn btn-sm btn-outline-primary" (click)="editarSala(sala)">Editar</button>
+          <button class="btn btn-danger btn-sm ms-2" (click)="eliminarSala(sala.id)">Eliminar</button>
+        </div>
+      </div>
 
-<div *ngIf="!cargando && salas.length === 0">
-  No hay salas registradas.
+      <!-- Modo edición -->
+      <div *ngIf="salaEditando?.id === sala.id" class="row g-2 align-items-center mt-2">
+        <div class="col-md-3">
+          <input type="text" class="form-control" [(ngModel)]="salaEditando.nombre" placeholder="Nombre" />
+        </div>
+        <div class="col-md-3">
+          <input type="text" class="form-control" [(ngModel)]="salaEditando.ubicacion" placeholder="Ubicación" />
+        </div>
+        <div class="col-md-2">
+          <input type="number" class="form-control" [(ngModel)]="salaEditando.capacidad" placeholder="Capacidad" />
+        </div>
+        <div class="col-md-4 d-flex gap-2">
+          <button class="btn btn-success btn-sm" (click)="guardarEdicion()">Guardar</button>
+          <button class="btn btn-secondary btn-sm" (click)="cancelarEdicion()">Cancelar</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div *ngIf="!cargando && salas.length === 0" class="alert alert-warning mt-3">
+    No hay salas registradas.
+  </div>
 </div>

@@ -1,17 +1,19 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" routerLink="/" routerLinkActive="active">Crear Sala</a>
-          <a class="nav-link" routerLink="/salas" routerLinkActive="active">Salas</a>
-          <a class="nav-link" routerLink="/reservas" routerLinkActive="active">Crear reserva</a>
-          <a class="nav-link" routerLink="/reservas2" routerLinkActive="active">Ver Reservas</a>
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </div>
+<!-- Navbar para la navegacion de la app, se utiliza bootstrap para el diseño de la app y usa Angular Router para navegar entre componentes con routerLink -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="#">Lion Intel</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" routerLink="/" routerLinkActive="active">Crear Reserva</a>
+        <a class="nav-link" routerLink="/reservas2" routerLinkActive="active">Ver Reservas</a>
+        <a class="nav-link" routerLink="/salas2" routerLinkActive="active">Crear Sala</a>
+        <a class="nav-link" routerLink="/salas" routerLinkActive="active">Salas</a>
       </div>
     </div>
+  </div>
 </nav>

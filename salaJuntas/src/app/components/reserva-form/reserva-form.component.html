@@ -1,13 +1,48 @@
-<h2>Crear Reserva</h2>
-<form (ngSubmit)="crearReserva()">
-  <label for="sala">ID de Sala:</label>
-  <input type="number" id="sala" [(ngModel)]="reserva.sala_id" name="sala_id" required />
+<!-- Vista del formulario para hcer una reserva nueva -->
+<div class="container mt-4">
+  <h2 class="mb-4">Crear Reserva</h2>
 
-  <label for="inicio">Inicio:</label>
-  <input type="datetime-local" id="inicio" [(ngModel)]="reserva.hora_inicio" name="hora_inicio" required />
+  <form (ngSubmit)="crearReserva()" class="card p-4 shadow-sm">
+    <div class="mb-3">
+      <label for="sala" class="form-label">Sala</label>
+      <select
+        id="sala"
+        class="form-select"
+        [(ngModel)]="reserva.sala_id"
+        name="sala_id"
+        required
+      >
+        <option value="" disabled selected>Seleccione una sala</option>
+        <option *ngFor="let sala of salas" [value]="sala.id">{{ sala.nombre }}</option>
+      </select>
+    </div>
 
-  <label for="fin">Fin:</label>
-  <input type="datetime-local" id="fin" [(ngModel)]="reserva.hora_fin" name="hora_fin" required />
+    <div class="mb-3">
+      <label for="inicio" class="form-label">Hora de Inicio</label>
+      <input
+        type="datetime-local"
+        id="inicio"
+        class="form-control"
+        [(ngModel)]="reserva.hora_inicio"
+        name="hora_inicio"
+        required
+      />
+    </div>
 
-  <button type="submit">Reservar</button>
-</form>
+    <div class="mb-3">
+      <label for="fin" class="form-label">Hora de Fin</label>
+      <input
+        type="datetime-local"
+        id="fin"
+        class="form-control"
+        [(ngModel)]="reserva.hora_fin"
+        name="hora_fin"
+        required
+      />
+    </div>
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-primary bg-dark">Reservar</button>
+    </div>
+  </form>
+</div>
