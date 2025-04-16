@@ -21,7 +21,7 @@ app.get('/crear-tabla', async (req, res) => {
           disponible BOOLEAN DEFAULT TRUE
         );
       `);
-      res.send('Tabla "salas" creada o ya existente.');
+      res.json('Tabla "salas" creada o ya existente.');
     } catch (err) {
       console.error('Error creando la tabla:', err.message);
       res.status(500).send('Error creando la tabla.');
@@ -77,7 +77,7 @@ app.get('/crear-tabla', async (req, res) => {
         'UPDATE salas SET nombre = $1, ubicacion = $2, capacidad = $3 WHERE id = $4',
         [nombre, ubicacion, capacidad, id]
       );
-      res.send('Sala actualizada correctamente');
+      res.json('Sala actualizada correctamente');
     } catch (err) {
       console.error('Error al actualizar sala:', err.message);
       res.status(500).send('Error al actualizar sala');
@@ -90,7 +90,7 @@ app.get('/crear-tabla', async (req, res) => {
     try {
       const result = await pool.query('DELETE FROM salas WHERE id = $1 RETURNING *', [id]);
       if (result.rows.length === 0) return res.status(404).send('Sala no encontrada');
-      res.send('Sala eliminada correctamente');
+      res.json('Sala eliminada correctamente');
     } catch (err) {
       console.error(err);
       res.status(500).send('Error al eliminar la sala');
@@ -110,7 +110,7 @@ app.get('/crear-tabla', async (req, res) => {
           creada_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
       `);
-      res.send('Tabla "reservas" creada o ya existente.');
+      res.json('Tabla "reservas" creada o ya existente.');
     } catch (err) {
       console.error('Error creando la tabla reservas:', err.message);
       res.status(500).send('Error creando la tabla reservas.');
@@ -184,7 +184,7 @@ app.get('/crear-tabla', async (req, res) => {
         [id]
       );
       if (result.rows.length === 0) return res.status(404).send('Reserva no encontrada');
-      res.send('Reserva cancelada/liberada correctamente');
+      res.json('Reserva cancelada/liberada correctamente');
     } catch (err) {
       console.error('Error al eliminar reserva:', err.message);
       res.status(500).send('Error al eliminar la reserva');

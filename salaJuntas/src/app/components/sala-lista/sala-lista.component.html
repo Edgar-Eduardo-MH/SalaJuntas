@@ -10,19 +10,19 @@
   <ul class="list-group" *ngIf="!cargando && salas.length > 0">
     <li class="list-group-item mb-2" *ngFor="let sala of salas">
       <!-- Vista normal -->
-      <div *ngIf="salaEditando?.id !== sala.id" class="d-flex justify-content-between align-items-center">
+      <div *ngIf="salaEditando?.id !== sala.id" class="d-flex justify-content-between ms-auto align-items-center">
         <div>
-          <strong>{{ sala.nombre }}</strong> – {{ sala.ubicacion }} 
+          <strong>{{ sala.nombre }}</strong> - {{ sala.ubicacion }} 
           <span class="badge bg-secondary ms-2">Capacidad: {{ sala.capacidad }}</span>
         </div>
-        <div class="col-md-4 d-flex gap-2">
+        <div class="d-flex gap-2">
           <button class="btn btn-sm btn-outline-primary" (click)="editarSala(sala)">Editar</button>
-          <button class="btn btn-danger btn-sm ms-2" (click)="eliminarSala(sala.id)">Eliminar</button>
+          <button class="btn btn-outline-danger btn-sm ms-2" (click)="eliminarSala(sala.id)">Eliminar</button>
         </div>
       </div>
 
       <!-- Modo edición -->
-      <div *ngIf="salaEditando?.id === sala.id" class="row g-2 align-items-center mt-2">
+      <div *ngIf="salaEditando?.id === sala.id" class="row g-2 align-items- mt-2">
         <div class="col-md-3">
           <input type="text" class="form-control" [(ngModel)]="salaEditando.nombre" placeholder="Nombre" />
         </div>
