@@ -1,0 +1,13 @@
+<h2>Crear Reserva</h2>
+<form (ngSubmit)="crearReserva()">
+  <label for="sala">ID de Sala:</label>
+  <input type="number" id="sala" [(ngModel)]="reserva.sala_id" name="sala_id" required />
+
+  <label for="inicio">Inicio:</label>
+  <input type="datetime-local" id="inicio" [(ngModel)]="reserva.hora_inicio" name="hora_inicio" required />
+
+  <label for="fin">Fin:</label>
+  <input type="datetime-local" id="fin" [(ngModel)]="reserva.hora_fin" name="hora_fin" required />
+
+  <button type="submit">Reservar</button>
+</form>

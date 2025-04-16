@@ -1,0 +1,13 @@
+<h2>Lista de Salas</h2>
+
+<div *ngIf="cargando">Cargando salas...</div>
+
+<ul *ngIf="!cargando && salas.length > 0">
+  <li *ngFor="let sala of salas">
+    <strong>{{ sala.nombre }}</strong> – {{ sala.ubicacion }} (Capacidad: {{ sala.capacidad }})
+  </li>
+</ul>
+
+<div *ngIf="!cargando && salas.length === 0">
+  No hay salas registradas.
+</div>

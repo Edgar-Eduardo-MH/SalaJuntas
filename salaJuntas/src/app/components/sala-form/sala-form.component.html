@@ -1,0 +1,25 @@
+<h2>Agregar Sala de Juntas</h2>
+
+<form (ngSubmit)="crearSala()" #formulario="ngForm">
+  <label>
+    Nombre:
+    <input type="text" [(ngModel)]="sala.nombre" name="nombre" required />
+  </label>
+  <br />
+
+  <label>
+    Capacidad:
+    <input type="number" [(ngModel)]="sala.capacidad" name="capacidad" required />
+  </label>
+  <br />
+
+  <label>
+    Ubicación:
+    <input type="text" [(ngModel)]="sala.ubicacion" name="ubicacion" required />
+  </label>
+  <br />
+
+  <button type="submit" [disabled]="formulario.invalid">Crear Sala</button>
+</form>
+
+<p>{{ mensaje }}</p>
